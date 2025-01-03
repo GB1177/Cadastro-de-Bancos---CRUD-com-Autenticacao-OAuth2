@@ -1,0 +1,42 @@
+<div class="container-fluid vh-100 d-flex align-items-center justify-content-center bg-light">
+  <div class="row w-100">
+    <div class="col-12 col-md-6 mx-auto">
+      <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+          <h3 class="mb-0">Login</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="email" class="form-label">Email ou Usuário</label>
+              <input type="text" id="email" formControlName="email" class="form-control"
+                placeholder="Digite seu email ou usuário" required />
+              <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger small">
+                Insira um email ou usuário válido.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Senha</label>
+              <input type="password" id="password" formControlName="password" class="form-control"
+                placeholder="Digite sua senha" required />
+              <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                class="text-danger small">
+                A senha é obrigatória.
+              </div>
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Entrar</button>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer text-center">
+          <p class="small mb-0">
+            Não possui uma conta? <a href="#" class="text-primary">Cadastre-se</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
