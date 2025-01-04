@@ -8,7 +8,6 @@
         <h4 class="mb-0">Autenticação</h4>
       </div>
       <form [formGroup]="loginForm">
-        <!-- Usuário -->
         <div class="form-group">
           <label for="user">Usuário</label>
           <input type="text" id="user" formControlName="user" class="form-control"
@@ -18,7 +17,6 @@
           </small>
         </div>
 
-        <!-- Senha -->
         <div class="form-group">
           <label for="password">Senha</label>
           <input type="password" id="password" formControlName="password" class="form-control"
@@ -28,9 +26,8 @@
           </small>
         </div>
 
-        <!-- Botão -->
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">
+          <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid" (click)="onSubmit()">
             Entrar
           </button>
         </div>

@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     password: 'A senha é obrigatória.',
   };
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(private fb: FormBuilder, public authService: AuthService) {}
 
   ngOnInit(): void {
     this.initializeForm();
