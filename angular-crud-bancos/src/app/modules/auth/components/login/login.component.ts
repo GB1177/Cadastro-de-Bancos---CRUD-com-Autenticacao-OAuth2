@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { AuthService } from 'src/app/modules/shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,9 +9,13 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-  isSubmitting: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  errorMessages = {
+    user: 'O nome de usuário é obrigatório.',
+    password: 'A senha é obrigatória.',
+  };
+
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.initializeForm();
@@ -19,9 +23,14 @@ export class LoginComponent implements OnInit {
 
   private initializeForm(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      user: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
+  }
+
+  isInvalid(field: string): boolean {
+    const control = this.loginForm.get(field);
+    return control ? control.invalid && control.touched : false;
   }
 
   onSubmit(): void {
@@ -30,38 +39,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.isSubmitting = true;
-
-    const { email, password } = this.loginForm.value;
-
-    this.authenticate(email, password)
-      .then(() => {
-        this.router.navigate(['/dashboard']);
-      })
-      .catch((error) => {
-        console.error('Erro na autenticação:', error);
-        alert('Credenciais inválidas. Tente novamente.');
-      })
-      .finally(() => {
-        this.isSubmitting = false;
-      });
-  }
-
-  /**
-   * Simula uma chamada de autenticação para o backend
-   * @param email Email do usuário
-   * @param password Senha do usuário
-   * @returns Promise<void>
-   */
-  private authenticate(email: string, password: string): Promise<void> {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (email === 'devadmin@example.com' && password === 'admin@123') {
-          resolve();
-        } else {
-          reject('Usuário ou senha inválidos.');
-        }
-      }, 2000); // Simula tempo de resposta da API
-    });
+    const { user, password } = this.loginForm.value;
+    this.authService.login(user, password);
   }
 }
