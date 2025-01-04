@@ -13,4 +13,4 @@ import { RouterModule } from '@angular/router';
     LoginComponent,
   ],
 })
-export class AuthModule {}
+export class LoginModule {}

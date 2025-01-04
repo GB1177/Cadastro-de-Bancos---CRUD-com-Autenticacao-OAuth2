@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AuthInterceptor } from './modules/core/interceptors/auth.interceptor';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { SharedModule } from './modules/shared/shared.module';
-import { AuthModule } from './modules/auth/auth.module';
+import { LoginModule } from './modules/login/login.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +15,7 @@ import { AuthModule } from './modules/auth/auth.module';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
-    AuthModule,
+    LoginModule,
     OAuthModule.forRoot({
       resourceServer: {
         allowedUrls: [

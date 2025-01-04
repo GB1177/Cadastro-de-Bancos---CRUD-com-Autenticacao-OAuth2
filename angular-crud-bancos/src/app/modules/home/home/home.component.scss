@@ -1,0 +1,42 @@
+$primary-color: #C61D0F;
+
+#sidebar {
+  background-color: $primary-color;
+  min-height: 100vh;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+.header {
+  background-color: #f8f9fa;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+  font-size: 1rem;
+  color: #495057;
+}
+
+.main-content {
+  padding: 20px;
+}
+
+@media (max-width: 767px) {
+  #sidebar {
+    display: none; 
+  }
+
+  .col.ms-5 {
+    margin-left: 0 !important;
+  }
+}
