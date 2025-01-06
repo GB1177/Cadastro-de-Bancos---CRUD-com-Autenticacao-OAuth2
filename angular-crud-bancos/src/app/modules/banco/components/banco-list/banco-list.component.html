@@ -1,1 +1,39 @@
-<p>banco-list works!</p>
+<div class="banco-list-container">
+  <header class="header">
+    <h1>Cadastro de Bancos</h1>
+    <div class="header-actions">
+      <input type="text" class="search" placeholder="Pesquisar banco" [(ngModel)]="searchQuery" (input)="filterBancos()"
+        aria-label="Pesquisar banco" />
+      <button class="btn btn-primary" (click)="novoBanco()">Novo</button>
+      <button class="btn btn-danger" [disabled]="!selectedBancos.length" (click)="excluirSelecionados()">
+        Excluir
+      </button>
+    </div>
+  </header>
+
+  <table class="banco-table">
+    <thead>
+      <tr>
+        <th>
+          <input type="checkbox" (change)="toggleSelectAll($event)" />
+        </th>
+        <th>ID</th>
+        <th>Status</th>
+        <th>Código</th>
+        <th>Descrição</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let banco of bancos">
+        <td>
+          <input type="checkbox" class="banco-checkbox" [checked]="isSelected(banco.id)"
+            (change)="toggleSelection(banco.id)" />
+        </td>
+        <td>{{ banco.id }}</td>
+        <td>{{ banco.status.descricao || "sem decrição" }}</td>
+        <td>{{ banco.codigo }}</td>
+        <td>{{ banco.descricao }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

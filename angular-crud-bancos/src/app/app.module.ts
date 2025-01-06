@@ -32,6 +32,6 @@ import { LoginModule } from './modules/login/login.module';
       multi: true,
     },
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent], 
 })
 export class AppModule {}

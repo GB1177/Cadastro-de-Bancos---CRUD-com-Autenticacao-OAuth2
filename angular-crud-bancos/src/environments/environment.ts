@@ -1,5 +1,6 @@
 export const environment = {
   production: false,
+  apiUrl: 'https://api-dev.princeton-lemitar.com.br',
   auth: {
     issuer: 'https://auth-dev.princeton-lemitar.com.br/realms/princeton-lemitar',
     clientId: 'sinple-web',

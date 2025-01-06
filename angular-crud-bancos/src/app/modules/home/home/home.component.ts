@@ -23,4 +23,8 @@ export class HomeComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
+  navigateTo(route: string): void {
+    this.router.navigate([`/home/${route}`]);
+  }
 }
