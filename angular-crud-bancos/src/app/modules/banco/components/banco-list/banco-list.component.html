@@ -23,17 +23,18 @@
         <th>Descrição</th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let banco of bancos">
-        <td>
-          <input type="checkbox" class="banco-checkbox" [checked]="isSelected(banco.id)"
-            (change)="toggleSelection(banco.id)" />
-        </td>
-        <td>{{ banco.id }}</td>
-        <td>{{ banco.status.descricao || "sem decrição" }}</td>
-        <td>{{ banco.codigo }}</td>
-        <td>{{ banco.descricao }}</td>
-      </tr>
-    </tbody>
+<tbody>
+  <tr *ngFor="let banco of bancos" (click)="verDetalheBanco(banco.id)" class="clickable-row">
+    <td>
+      <input type="checkbox" class="banco-checkbox" [checked]="isSelected(banco.id)"
+        (change)="toggleSelection(banco.id)" />
+    </td>
+    <td>{{ banco.id }}</td>
+    <td>{{ banco.status.descricao || 'sem descrição' }}</td>
+    <td>{{ banco.codigo }}</td>
+    <td>{{ banco.descricao }}</td>
+  </tr>
+</tbody>
+
   </table>
 </div>

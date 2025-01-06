@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Banco } from 'src/app/interfaces/Bancos/banco';
 import { BancoService } from 'src/app/modules/shared/services/bancos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-banco-list',
@@ -14,7 +15,8 @@ export class BancoListComponent implements OnInit {
   searchQuery = '';
   constructor(
     private bancoService: BancoService,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -51,16 +53,13 @@ export class BancoListComponent implements OnInit {
   toggleSelectAll(event: Event): void {
     const checkbox = event.target as HTMLInputElement;
     const isChecked = checkbox.checked;
-    // console.log('isChecked before update:', isChecked);
 
     this.filteredBancos = this.filteredBancos.map((banco) => {
-      // console.log('Before update:', banco.isSelected);
       return {
         ...banco,
         isSelected: isChecked,
       };
     });
-    // console.log('filteredBancos after update:', this.filteredBancos);
     this.changeDetector.detectChanges();
   }
 
@@ -72,6 +71,10 @@ export class BancoListComponent implements OnInit {
   }
 
   novoBanco(): void {
-    // Redirecionar para o formulário de criação (implemente a lógica aqui)
+    this.router.navigate(['/home/bancos/novo']);
+  }
+
+  verDetalheBanco(id: number): void {
+    this.router.navigate([`/home/bancos/detalhe/${id}`]);
   }
 }

@@ -1,1 +1,49 @@
-<p>banco-detail works!</p>
+<div class="banco-detail-container" *ngIf="banco">
+  <header class="header">
+    <h1>Cadastro Banco</h1>
+  </header>
+
+  <div class="header-actions">
+    <button class="btn btn-primary" (click)="editarBanco()" *ngIf="podeEditar()">
+      Editar
+    </button>
+    <button class="btn btn-danger" (click)="excluirBanco()" *ngIf="podeEditar()">Excluir</button>
+    <button class="btn btn-secondary" (click)="fechar()">Fechar</button>
+  </div>
+
+  <div class="banco-details">
+    <div class="mb-3">
+      <label for="codigo" class="form-label">Código:</label>
+      <ng-container *ngIf="isEditMode">
+        <input id="codigo" [(ngModel)]="banco.codigo" type="text" class="form-control" />
+      </ng-container>
+      <ng-container *ngIf="!isEditMode">
+        <p id="codigo">{{ banco.codigo }}</p>
+      </ng-container>
+    </div>
+
+    <div class="mb-3">
+      <label for="descricao" class="form-label">Descrição:</label>
+      <ng-container *ngIf="isEditMode">
+        <input id="descricao" [(ngModel)]="banco.descricao" type="text" class="form-control" />
+      </ng-container>
+      <ng-container *ngIf="!isEditMode">
+        <p id="descricao">{{ banco.descricao }}</p>
+      </ng-container>
+    </div>
+
+    <div class="mb-3">
+      <label for="status" class="form-label">Status:</label>
+      <ng-container *ngIf="isEditMode">
+        <select id="status" [(ngModel)]="banco.status.descricao" class="form-select">
+          <option value="Ativo" [selected]="banco.status.descricao === 'Ativo'">Ativo</option>
+          <option value="Inativo" [selected]="banco.status.descricao === 'Inativo'">Inativo</option>
+        </select>
+      </ng-container>
+      <ng-container *ngIf="!isEditMode">
+        <p id="status">{{ banco.status.descricao || 'Sem descrição' }}</p>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
