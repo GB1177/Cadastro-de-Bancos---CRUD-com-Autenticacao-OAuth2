@@ -5,7 +5,7 @@
       <input type="text" class="search" placeholder="Pesquisar banco" [(ngModel)]="searchQuery" (input)="filterBancos()"
         aria-label="Pesquisar banco" />
       <button class="btn btn-primary" (click)="novoBanco()">Novo</button>
-      <button class="btn btn-danger" [disabled]="!selectedBancos.length" (click)="excluirSelecionados()">
+      <button class="btn btn-danger" [disabled]="!selectedBancos?.length" (click)="excluirSelecionados()">
         Excluir
       </button>
     </div>
@@ -15,7 +15,7 @@
     <thead>
       <tr>
         <th>
-          <input type="checkbox" (change)="toggleSelectAll($event)" />
+          <input type="checkbox" id="selectAll" (change)="toggleSelectAll($event)"  />
         </th>
         <th>ID</th>
         <th>Status</th>
@@ -24,15 +24,15 @@
       </tr>
     </thead>
 <tbody>
-  <tr *ngFor="let banco of bancos" (click)="verDetalheBanco(banco.id)" class="clickable-row">
+  <tr *ngFor="let banco of bancos"  class="clickable-row">
     <td>
       <input type="checkbox" class="banco-checkbox" [checked]="isSelected(banco.id)"
         (change)="toggleSelection(banco.id)" />
     </td>
-    <td>{{ banco.id }}</td>
-    <td>{{ banco.status.descricao || 'sem descrição' }}</td>
+    <td >{{ banco.id }}</td>
+    <td >{{ banco.status.descricao || 'sem descrição' }}</td>
     <td>{{ banco.codigo }}</td>
-    <td>{{ banco.descricao }}</td>
+    <td (click)="verDetalheBanco(banco.id)">{{ banco.descricao }}</td>
   </tr>
 </tbody>
 

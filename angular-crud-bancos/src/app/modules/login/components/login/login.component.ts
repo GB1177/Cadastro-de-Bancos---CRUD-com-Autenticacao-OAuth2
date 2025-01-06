@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(user, password).subscribe({
       next: () => {
-        this.authService.setUserName(user); // Armazena o nome do usuário
+        this.authService.setUserName(user); 
         this.router.navigate(['/home']);
       },
       error: (err) => {

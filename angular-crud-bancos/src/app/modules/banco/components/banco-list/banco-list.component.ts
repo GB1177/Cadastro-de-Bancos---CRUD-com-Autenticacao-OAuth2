@@ -10,9 +10,10 @@ import { Router } from '@angular/router';
 })
 export class BancoListComponent implements OnInit {
   public bancos: Banco[] = [];
-  filteredBancos: Banco[] = [];
-  selectedBancos: number[] = [];
-  searchQuery = '';
+  public filteredBancos: Banco[] = [];
+  public selectedBancos: number[] = [];
+  public searchQuery = '';
+
   constructor(
     private bancoService: BancoService,
     private changeDetector: ChangeDetectorRef,
@@ -23,58 +24,60 @@ export class BancoListComponent implements OnInit {
     this.loadBancos();
   }
 
-  loadBancos(): void {
+  private loadBancos(): void {
     this.bancoService.getBancos().subscribe((data) => {
       this.bancos = data;
     });
   }
 
-  filterBancos(): void {
+  public filterBancos(): void {
     const query = this.searchQuery.toLowerCase();
     this.filteredBancos = this.bancos.filter((banco) =>
       banco.descricao.toLowerCase().includes(query)
     );
   }
 
-  toggleSelection(id: number): void {
-    if (this.selectedBancos.includes(id)) {
-      this.selectedBancos = this.selectedBancos.filter(
-        (selectedId) => selectedId !== id
-      );
+  public toggleSelection(id: number): void {
+    const index = this.selectedBancos.indexOf(id);
+    if (index > -1) {
+      this.selectedBancos.splice(index, 1);
     } else {
       this.selectedBancos.push(id);
     }
   }
 
-  isSelected(id: number): boolean {
+  public isSelected(id: number): boolean {
     return this.selectedBancos.includes(id);
   }
 
-  toggleSelectAll(event: Event): void {
-    const checkbox = event.target as HTMLInputElement;
-    const isChecked = checkbox.checked;
-
-    this.filteredBancos = this.filteredBancos.map((banco) => {
-      return {
-        ...banco,
-        isSelected: isChecked,
-      };
-    });
+  public toggleSelectAll(event: Event): void {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    this.selectedBancos = isChecked
+      ? [...new Set([...this.selectedBancos, ...this.getBancoIds()])]
+      : [];
     this.changeDetector.detectChanges();
   }
 
-  excluirSelecionados(): void {
+  private getBancoIds(): number[] {
+    return this.bancos.map((banco) => banco.id);
+  }
+
+  public excluirSelecionados(): void {
     this.bancoService.deleteBancos(this.selectedBancos).subscribe(() => {
       this.loadBancos();
       this.selectedBancos = [];
     });
   }
 
-  novoBanco(): void {
+  public novoBanco(): void {
     this.router.navigate(['/home/bancos/novo']);
   }
 
-  verDetalheBanco(id: number): void {
+  public verDetalheBanco(id: number): void {
     this.router.navigate([`/home/bancos/detalhe/${id}`]);
+  }
+
+  public isSelectAllChecked(): boolean {
+    return this.bancos.every((banco) => this.isSelected(banco.id));
   }
 }

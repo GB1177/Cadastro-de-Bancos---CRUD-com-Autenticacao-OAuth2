@@ -21,12 +21,12 @@ export class BancoDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id']; // Obtém o ID da URL
+    const id = this.route.snapshot.params['id']; 
     this.bancoService.getBancoById(id).subscribe(
       (data: Banco) => {
         this.banco = data;
         if (this.podeEditar()) {
-          this.isEditMode = true; // Habilita a edição para devadmin automaticamente
+          this.isEditMode = true;
         }
       },
       (error) => {
@@ -44,10 +44,9 @@ export class BancoDetailComponent implements OnInit {
 
   editarBanco(): void {
     if (this.isEditMode) {
-      // Chama a função de salvar quando o modo de edição está ativado
       this.salvarBanco();
     } else {
-      this.isEditMode = true; // Se o banco não estiver em edição, entra no modo de edição
+      this.isEditMode = true;
     }
   }
 
@@ -57,7 +56,7 @@ export class BancoDetailComponent implements OnInit {
     this.bancoService.updateBanco(this.banco.id, this.banco).subscribe(
       (data) => {
         alert('Banco atualizado com sucesso!');
-        this.isEditMode = false; // Desativa o modo de edição após salvar
+        this.isEditMode = false;
       },
       (error) => {
         console.error('Erro ao salvar os dados do banco:', error);
@@ -72,7 +71,7 @@ export class BancoDetailComponent implements OnInit {
       this.bancoService.deleteBanco(id).subscribe(
         () => {
           alert('Banco excluído com sucesso!');
-          this.router.navigate(['/home/bancos']); // Redireciona para a lista de bancos
+          this.router.navigate(['/home/bancos']);
         },
         (error) => {
           console.error('Erro ao excluir o banco:', error);
