@@ -1,27 +1,43 @@
 # AngularCrudBancos
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+Este é um projeto Angular de CRUD (Create, Read, Update, Delete) para gerenciar bancos. Ele utiliza autenticação via OAuth2 e a integração com a API de backend.
 
-## Development server
+Angular na versão 16.2.16.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# Tecnologias Utilizadas
 
-## Code scaffolding
+Angular: Framework JavaScript para construção de interfaces dinâmicas.
+OAuth2: Autenticação via OAuth2 utilizando o pacote angular-oauth2-oidc.
+Bootstrap: Framework CSS para estilização responsiva.
+RxJS: Biblioteca para programação reativa, usada para manipulação de fluxos assíncronos.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+Pré-Requisitos
+Antes de rodar o projeto, você precisa ter o Node.js e o Angular CLI instalados. Se você ainda não tem, siga os passos abaixo:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Instalando o Node.js
+Acesse Node.js.
+Baixe e instale a versão estável recomendada.
+Instalando o Angular CLI
+Após ter o Node.js instalado, instale o Angular CLI globalmente:
 
-## Running unit tests
+npm install -g @angular/cli
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Como Baixar o Projeto
+Clone o Repositório
 
-## Running end-to-end tests
+No terminal, digite o comando para clonar o repositório
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+git clone https://github.com/GB1177/Cadastro-de-Bancos---CRUD-com-Autenticacao-OAuth2.git
 
-## Further help
+# Como Instalar as Dependências
+No diretório do projeto, instale as dependências listadas no package.json:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+npm install
+
+# Como Rodar o Projeto
+Para rodar o projeto localmente, utilize o comando:
+
+npm start ou ng serve
+
+
